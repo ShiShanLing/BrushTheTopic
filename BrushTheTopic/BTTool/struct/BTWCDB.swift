@@ -12,11 +12,14 @@ import WCDBSwift
 enum BTWCDBEntityEnum:String {
     ///习题
     case BTTopicEntity = "BTTopicEntity"
-    
+    ///标题
+    case BTTopicTitle = "BTTopicTitle"
     
     func entityTable() -> String {
         switch self {
         case .BTTopicEntity:
+            return "\(self.rawValue)Table"
+        case .BTTopicTitle:
             return "\(self.rawValue)Table"
         }
     }
