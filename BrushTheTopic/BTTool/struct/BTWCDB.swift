@@ -77,7 +77,7 @@ struct BTWCDB {
     }
     
     
-    func delectEntity(_ models:[BTTopicEntity],condition: Condition? = nil) {
+    func delectEntity(_ models:[BTTopicEntity], entity:BTWCDBEntityEnum, condition: Condition? = nil) {
         
 //        do {
 //            try database.delete(fromTable: <#T##String#>, where: <#T##Condition?#>, orderBy: <#T##[OrderBy]?#>, limit: <#T##Limit?#>, offset: <#T##Offset?#>)
