@@ -40,7 +40,7 @@ struct BTWCDB {
     }
     //MARK:创建数据库
     ///创建数据库
-    mutating func createDatabase<Object: TableDecodable>(entity:BTWCDBEntityEnum, of rootType: Object.Type) {
+    mutating func createDatabase<Object: TableDecodable>(_ entity:BTWCDBEntityEnum, of rootType: Object.Type) {
         //创建数据库表
         if !FileManager.default.fileExists(atPath: BTWCDB.dataBasePath(entity)) {
             // 以下代码等效于 SQL：CREATE TABLE IF NOT EXISTS sampleTable(identifier INTEGER, description TEXT)
