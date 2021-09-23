@@ -1,0 +1,36 @@
+//
+//  BTTopicTypeEntity.swift
+//  BrushTheTopic
+//
+//  Created by 石山岭 on 2021/9/22.
+//
+
+import Foundation
+import HandyJSON
+import WCDBSwift
+
+enum BTTopicTypeEnum {
+    case SwiftUI
+    case Swift
+    case OC
+}
+
+struct BTTopicTypeEntity: TableCodable,HandyJSON, Hashable {
+    
+    var topicType = "Swift"
+    
+    enum CodingKeys:String, CodingTableKey {
+        typealias Root = BTTopicTypeEntity
+        static let objectRelationalMapping = TableBinding(CodingKeys.self)
+        case topicType
+        
+        static var columnConstraintBindings: [CodingKeys: ColumnConstraintBinding]? {
+              return [
+                topicType: ColumnConstraintBinding(isPrimary: true),
+              ]
+          }
+  
+        
+    }
+    
+}
