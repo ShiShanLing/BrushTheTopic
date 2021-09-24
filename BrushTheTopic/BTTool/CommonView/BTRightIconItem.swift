@@ -7,23 +7,28 @@
 
 import SwiftUI
 
+
 struct BTRightIconItem: View {
     
-    @State var typeSelect = false
+    init(closure:@escaping BTCommonClosure<BTTopicTypeEntity>) {
+        self.closure = closure
+    }
     
-    @State var contentText = "请选择"
+    @State private var typeSelect = false
     
-    var closure:BTCommonClosure<String>?
+    @State private var contentText = "请选择"
     
-    var topicTypes:[String]
+    var closure:BTCommonClosure<BTTopicTypeEntity>
+    
+    private var topicTypes:[BTTopicTypeEntity] = BTWCDB.queryEntityTable(.topicType)
     
     var body: some View {
         
         Menu.init {
-            ForEach.init(topicTypes, id: \.self) { Str in
-                Button.init(Str) {
-                    contentText = Str
-                    closure?(Str)
+            ForEach.init(topicTypes, id: \.self) { model in
+                Button.init(model.topicType) {
+                    contentText = model.topicType
+                    closure(model)
                 }
             }
         } label: {
@@ -40,8 +45,8 @@ struct BTRightIconItem: View {
 
 struct BTRightIconItem_Previews: PreviewProvider {
     static var previews: some View {
-        BTRightIconItem(closure: { Str in
-            print("")
-        }, topicTypes:["OC", "Swift", "SwiftUI"])
+        BTRightIconItem.init { model in
+            
+        }
     }
 }

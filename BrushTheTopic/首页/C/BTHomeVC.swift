@@ -46,16 +46,17 @@ struct BTHomeVC: View {
     }
     
     func insertLocalTopic() {
-        globaWCDB.createDatabase(.BTTopicEntity, of: BTTopicEntity.self)
-        
+
+        BTWCDB.createDatabase(.topicEntity, of: BTTopicEntity.self)
         if !(BTUserDefaults.readState(type: .localTopicStored, TType: Bool.self) ?? false) {
-            globaWCDB.insertData(.BTTopicEntity, objects: BTTopicApi.importLocalData())
+            BTWCDB.insertData(.topicEntity, objects: BTTopicApi.importLocalData())
             let _ = BTUserDefaults.writeState(type: .localTopicStored)
         }
+        let modelArray:[BTTopicEntity] = BTWCDB.queryEntityTable(.topicType)
         
-        globaWCDB.createDatabase(.BTTopicEntity, of: BTTopicTypeEntity.self)
+        BTWCDB.createDatabase(.topicType, of: BTTopicTypeEntity.self)
         if !(BTUserDefaults.readState(type: .topicTypeStored, TType: Bool.self) ?? false) {
-            globaWCDB.insertData(.BTTopicEntity, objects: BTTopicApi.importLocalData())
+            BTWCDB.insertData(.topicType, objects: BTTopicApi.importTopicTitle())
             let _ = BTUserDefaults.writeState(type: .topicTypeStored)
         }
     }

@@ -9,20 +9,23 @@ import Foundation
 import WCDBSwift
 
 
+
 enum BTWCDBEntityEnum:String {
     ///习题
-    case BTTopicEntity = "BTTopicEntity"
+    case topicEntity = "topicEntity"
     ///标题
-    case BTTopicTitle = "BTTopicTitle"
+    case topicType = "topicType"
     
     func entityTable() -> String {
         switch self {
-        case .BTTopicEntity:
+        case .topicEntity:
             return "\(self.rawValue)Table"
-        case .BTTopicTitle:
+        case .topicType:
             return "\(self.rawValue)Table"
         }
     }
+
+    
 }
 var globaWCDB = BTWCDB()
 
@@ -43,7 +46,7 @@ struct BTWCDB {
     }
     //MARK:创建数据库
     ///创建数据库
-    mutating func createDatabase<Object: TableDecodable>(_ entity:BTWCDBEntityEnum, of rootType: Object.Type) {
+    static func createDatabase<Object: TableDecodable>(_ entity:BTWCDBEntityEnum, of rootType: Object.Type) {
         //创建数据库表
         if !FileManager.default.fileExists(atPath: BTWCDB.dataBasePath(entity)) {
             // 以下代码等效于 SQL：CREATE TABLE IF NOT EXISTS sampleTable(identifier INTEGER, description TEXT)
@@ -61,7 +64,7 @@ struct BTWCDB {
     /// - Parameters:
     ///   - entity: 插入的实体类型<影响到你插入到哪张表>
     ///   - objects: 对象数组
-    mutating func insertData<Object: TableEncodable>(_ entity:BTWCDBEntityEnum, objects:[Object]) {
+    static func insertData<Object: TableEncodable>(_ entity:BTWCDBEntityEnum, objects:[Object]) {
         
         do {
             try BTWCDB.database(entity).insertOrReplace(objects: objects, intoTable: entity.entityTable())
@@ -70,9 +73,12 @@ struct BTWCDB {
         }
     }
     
-    mutating func queryEntityTable<object: TableEncodable>(_ entity:BTWCDBEntityEnum) -> [object] where object : WCDBSwift.TableDecodable {
+    /// 查看数据库
+    /// - Returns: 返回对象
+    static func queryEntityTable<object: TableEncodable>(_ entity:BTWCDBEntityEnum) -> [object] where object : WCDBSwift.TableDecodable {
         do {
-            return try BTWCDB.database(entity).getObjects(fromTable: entity.entityTable())
+            let  object:[object] = try BTWCDB.database(entity).getObjects(fromTable: entity.entityTable())
+            return object
         } catch let error {
             print("查询失败\(error)")
         }

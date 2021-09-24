@@ -52,7 +52,7 @@ struct AddTopicView: View {
             //这个要在navigation内部隐藏
             .navigationBarHidden(true)
         }
-
+        
         .navigationTitle("添加题目")
         .foregroundColor(.blue)
         .navigationBarTitleDisplayMode(.inline)
@@ -89,7 +89,7 @@ struct BTTextEditor: View {
                 })
             
             if topicTitle.isEmpty {
-                HStack{
+                HStack(){
                     VStack{
                         Text("请输入")
                             .font(.custom("Helvetica", size: 15))
@@ -119,9 +119,10 @@ struct TopicTypeSelectView: View {
                 Spacer()
             }
             HStack {
-                BTRightIconItem(closure: { Str in
-                }, topicTypes:["OC", "Swift", "SwiftUI"])
-                    .padding(.leading, 15.0)
+                BTRightIconItem.init { model in
+                    
+                }
+                .padding(.leading, 15.0)
                 Spacer()
             }
         }

@@ -23,6 +23,17 @@ struct BTTopicApi {
         return topicArray
     }
     
+    static func importTopicTitle() -> [BTTopicTypeEntity]{
+        let tempArray = ["Swift", "OC", "Swift"]
+        var models = [BTTopicTypeEntity]()
+        for str in tempArray {
+            var model = BTTopicTypeEntity()
+            model.topicType = str
+            models.append(model)
+        }
+        return models
+    }
+    
 
 }
 
