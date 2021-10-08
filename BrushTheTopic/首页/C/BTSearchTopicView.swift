@@ -7,12 +7,14 @@
 
 import SwiftUI
 
+import WCDBSwift
+
 struct BTSearchTopicView: View {
 
     
     @State var searchTest = ""
     @Environment(\.presentationMode) var presentationMode
-    @State var searchResultsArray:[BTTopicEntity] = BTTopicApi.importLocalData()
+    @State var searchResultsArray:[BTTopicEntity] = BTWCDB.queryEntityTable(.topicEntity)
     var body: some View {
         VStack{
             HStack{
@@ -45,25 +47,38 @@ struct BTSearchTopicView: View {
                         .padding(.top, 10)
                     Spacer()
                 }
-                   
             }
             
             List.init {
-                ForEach.init(searchResultsArray, id: \.self) { data in
-                    BTSearchTopicCell(model: data)
-                        
-                }.onDelete(perform: { indexSet in
+                ForEach.init(searchResultsArray, id: \.self) { model in
+                    let tempView = AddTopicView(viewType:.Editor,
+                                                topicTitle: model.topicTitle,
+                                                topicAnswer: model.topicAnswer,
+                                                topicTypeModel: BTTopicTypeEntity(topicType: model.topicType),
+                                                topicID:model.topicID)
+                    NavigationLink(destination:tempView){
+                        BTSearchTopicCell(model: model)
+                    }
+                }
+                .onDelete(perform: { indexSet in
                     withAnimation(.easeOut) {
-                        searchResultsArray.remove(atOffsets: indexSet)
+                        let tempModel = searchResultsArray[indexSet.first ?? 0]
+                        BTWCDB.delectEntity(entity: BTWCDBEntityEnum.topicEntity, condition: BTTopicEntity.Properties.topicID == tempModel.topicID) { result in
+                            searchResultsArray.remove(atOffsets: indexSet)
+                        }
                     }
                 })
-                
+
             }
-            
-            
+            .listStyle(.plain)
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onReceive(NotificationCenter.default.publisher(
+            for: Notification.Name(rawValue: "update")
+        )) { _ in
+            searchResultsArray = BTWCDB.queryEntityTable(.topicEntity)
+        }
     }
     
     func getData(){
@@ -87,7 +102,7 @@ struct BTSearchTopicCell: View {
                     .font(.title3)
                 Spacer()
                 VStack{
-                    Text("学习过\(model.LearnNum)次")
+                    Text("学习过\(model.LearnNum )次")
                         .padding(.top, 5)
                         .padding(.bottom, 5)
                         .foregroundColor(.yellow)
@@ -122,6 +137,7 @@ struct BTSearchTopicCell: View {
             }
         }
     }
+        
 
     
 }

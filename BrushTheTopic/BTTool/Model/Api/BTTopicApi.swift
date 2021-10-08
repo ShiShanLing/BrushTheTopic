@@ -18,13 +18,14 @@ struct BTTopicApi {
         
         for i in 0..<dicArray.count {
             let tempDic = dicArray[i]
+
             topicArray.append(BTTopicEntity.deserialize(from: tempDic) ?? BTTopicEntity())
         }
         return topicArray
     }
     
     static func importTopicTitle() -> [BTTopicTypeEntity]{
-        let tempArray = ["Swift", "OC", "Swift"]
+        let tempArray = ["Swift", "OC", "SwiftUI"]
         var models = [BTTopicTypeEntity]()
         for str in tempArray {
             var model = BTTopicTypeEntity()

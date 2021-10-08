@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import WCDBSwift
 
 struct BTHomeVC: View {
     
@@ -26,13 +27,14 @@ struct BTHomeVC: View {
                         .padding(.all)
                         .foregroundColor(.white)
                     Spacer()
-                    Button.init("开始") {
-                        
+                    
+                    NavigationLink.init(destination: BTStartLearning()) {
+                        Text("开始")
+                        .frame(width: 100, height: 40, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                     }
-                    .frame(width: 100, height: 40, alignment: .center)
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
                     Spacer()
                     Spacer()
                 }
@@ -40,10 +42,18 @@ struct BTHomeVC: View {
             }
             .navigationBarItems(trailing: HomeNavigationView())
         }
+
+        .onDisappear(perform: {
+            
+        })
         .onAppear(perform: {
             insertLocalTopic()
         })
+        
+        
     }
+    
+
     
     func insertLocalTopic() {
 
@@ -52,13 +62,22 @@ struct BTHomeVC: View {
             BTWCDB.insertData(.topicEntity, objects: BTTopicApi.importLocalData())
             let _ = BTUserDefaults.writeState(type: .localTopicStored)
         }
-        let modelArray:[BTTopicEntity] = BTWCDB.queryEntityTable(.topicType)
         
+        do {
+            let models:[BTTopicEntity] = try BTWCDB.database(.topicEntity).getObjects(fromTable: BTWCDBEntityEnum.topicEntity.entityTable(), where: BTTopicEntity.Properties.topicType == "Swift")
+            print("models==\(models)")
+        } catch _ {
+            
+        }
+             
         BTWCDB.createDatabase(.topicType, of: BTTopicTypeEntity.self)
         if !(BTUserDefaults.readState(type: .topicTypeStored, TType: Bool.self) ?? false) {
             BTWCDB.insertData(.topicType, objects: BTTopicApi.importTopicTitle())
             let _ = BTUserDefaults.writeState(type: .topicTypeStored)
         }
+        
+//        let TypeArray:[BTTopicTypeEntity] = BTWCDB.queryEntityTable(.topicType)
+        
     }
     
     
@@ -69,7 +88,53 @@ struct BTHomeVC: View {
         return tempAny as? T
     }
 
+    func testInsert() {
+        let database = BTWCDB.database(.Test)
+        
+        do {
+            try database.create(table: "sampleTable", of: Sample.self)
+        } catch _ {
+            
+        }
+
+        let object = Sample()
+        object.identifier = 1
+        object.description = "insert"
+        do {
+            try database.insert(objects: object, intoTable: "sampleTable") // 插入成功
+        } catch _ {
+            
+        }
+
+        do {
+            let tempModels:[Sample] = try database.getObjects(fromTable: "sampleTable", where: Sample.Properties.identifier == 1)
+            print("tempModels==\(tempModels)")
+        } catch let error {
+            print(error)
+        }
+        
+        
+        
+    }
     
+}
+
+class Sample: TableCodable {
+    var identifier: Int? = nil
+    var description: String? = nil
+    
+    enum CodingKeys: String, CodingTableKey {
+        typealias Root = Sample
+        static let objectRelationalMapping = TableBinding(CodingKeys.self)
+        case identifier
+        case description
+
+        static var columnConstraintBindings: [CodingKeys: ColumnConstraintBinding]? {
+            return [
+                identifier: ColumnConstraintBinding(isPrimary: true),
+            ]
+        }
+    }
 }
 
 struct HomeBackgroundImageView : View{

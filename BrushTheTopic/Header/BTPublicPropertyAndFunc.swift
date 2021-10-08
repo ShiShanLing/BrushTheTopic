@@ -7,7 +7,7 @@
 ///全局的对象和方法会放到这里里面
 import Foundation
 import UIKit
-
+import SwiftUI
 //MARK: 屏幕的尺寸
 public let SCREEN_HEIGHT =  UIScreen.main.bounds.height
 public let SCREEN_WIDTH  =  UIScreen.main.bounds.width
@@ -22,6 +22,15 @@ func kFit(_ size:CGFloat) -> CGFloat {
         return size
     }
     
+}
+
+func kColor(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat) -> Color {
+    return Color(red: r/255, green: g/255, blue: b/255)
+}
+
+/// 返回颜色
+func kColor(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ alpha:CGFloat) -> UIColor {
+    return UIColor(red: r/255, green: g/255, blue: b/255, alpha: alpha)
 }
 
 typealias BTCommonClosure<T> = (T) -> ()

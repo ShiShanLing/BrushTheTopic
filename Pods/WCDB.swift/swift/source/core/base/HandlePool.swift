@@ -72,7 +72,7 @@ public final class HandlePool {
     private static func getExistingPool(atIndex index: Dictionary<String, Wrap>.Index) -> RecyclableHandlePool {
         let node = pools[index]
         let path = node.key
-        var wrap = node.value
+        let wrap = node.value
         wrap.reference += 1
         return Recyclable(wrap.handlePool, onRecycled: {
             spin.lock(); defer { spin.unlock() }

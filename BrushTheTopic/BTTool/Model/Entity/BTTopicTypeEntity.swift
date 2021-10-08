@@ -17,7 +17,7 @@ enum BTTopicTypeEnum {
 
 struct BTTopicTypeEntity: TableCodable,HandyJSON, Hashable {
     
-    var topicType = "Swift"
+    var topicType = ""
     
     enum CodingKeys:String, CodingTableKey {
         typealias Root = BTTopicTypeEntity
