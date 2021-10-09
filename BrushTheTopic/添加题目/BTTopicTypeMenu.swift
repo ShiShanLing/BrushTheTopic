@@ -16,6 +16,7 @@ struct BTTopicTypeMenu: View {
     @State var typeSelect = false
 
     
+    
     var topicTypes:[BTTopicTypeEntity] = BTWCDB.queryEntityTable(.topicType)
     
 //     @State var isShowingSheet = false

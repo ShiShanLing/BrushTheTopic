@@ -8,7 +8,9 @@
 import Foundation
 import AVFoundation
 
-class BTAudioRecorder {
+var audioRecorder = BTAudioRecorder()
+
+class BTAudioRecorder:NSObject, AVAudioRecorderDelegate {
     ///录音计时器
     var recordTimer:Timer?
     var recorder:AVAudioRecorder?
@@ -16,9 +18,11 @@ class BTAudioRecorder {
     //时间
     var recordSecond = 0
     
-    var recordEnd:BTCommonClosure<String>?
-    
-    var recordPath = ""
+    var recordPath = "" {
+        willSet {
+            print("newValue==\(newValue)")
+        }
+    }
     
     var fileName = ""
     
@@ -35,6 +39,12 @@ class BTAudioRecorder {
     func startRecording(recordingName:String, closure: BTCommonClosure<Int>?) {
         fileName = recordingName
         recordSecondClosure = closure
+        let recordSettings = [ AVFormatIDKey : kAudioFormatLinearPCM,
+                    AVEncoderAudioQualityKey : AVAudioQuality.high.rawValue,
+                       AVNumberOfChannelsKey : 2,
+                             AVSampleRateKey : 44100 ] as [String : Any]
+        
+        let _ = BTFileManage.fileExists(atPath: recordingCachePath)
         let configDic = [
             AVFormatIDKey: NSNumber(value: kAudioFormatLinearPCM),
         // 采样率
@@ -44,58 +54,63 @@ class BTAudioRecorder {
         // 录音质量
             AVEncoderAudioQualityKey: NSNumber(value: AVAudioQuality.min.rawValue)
         ]
+
         let recordingPath = URL(fileURLWithPath: recordingCachePath).appendingPathComponent("\(recordingName).wav")
-        BTFileManage.fileExists(atPath: recordingCachePath)
-        let recordingUrl = URL(string: recordingPath.path)!
+        
+        
         
         self.recordPath = recordingPath.path
-        
         do {
-            self.recorder = try AVAudioRecorder.init(url: recordingUrl, settings: configDic)
+            
+            self.recorder = try AVAudioRecorder.init(url: recordingPath, settings: recordSettings)
+            self.recorder?.delegate = self
         } catch let error {
             print("recorder_error 录音创建失败==\(error)")
         }
-        if recorder?.prepareToRecord() == true {
-            self.startRecording()
-        }else {
-            print("录音启动失败")
+        
+        SSLApplicationAuthorizationManage.requestApplicationAuthorization(permissionEnum: .audio) { _ in
+            if self.recorder?.prepareToRecord() == true {
+                self.startRecording()
+            }else {
+                print("录音启动失败")
+            }
         }
+     
     }
+    
+    let RecordingTimer = "RecordingTimer"
+
     
     func startRecording() {
         recorder?.record()
         self.recordSecond = 0
-        recordTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { tempTimer in
+        SSLDispatchTimer.createDispatchTimer(name: RecordingTimer, timeInterval: 1, queue: DispatchQueue.global(), repeats: true) {
             self.recordSecond += 1
             DispatchQueue.main.async {
                 self.recordSecondClosure?(self.recordSecond)
             }
+            print("startRecording==\(self.recordSecond)")
         }
-        recordTimer?.fire()
     }
     ///继续录音
     func continueRecording() {
         recorder?.record()
-        recordTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { tempTimer in
-            self.recordSecond += 1
-            DispatchQueue.main.async {
-                self.recordSecondClosure?(self.recordSecond)
-            }
-        }
-        recordTimer?.fire()
+        SSLDispatchTimer.continueDispatchTimer(name: RecordingTimer)
+        print("continueRecording===\(self.recordPath)")
     }
     ///暂停录音
     func pauseRecording() {
         recorder?.pause()
-        recordTimer?.invalidate()
-        recordTimer = nil
+        SSLDispatchTimer.pauseDispatchTimer(name: RecordingTimer)
+        print("pauseRecording===\(self.recordPath)")
     }
     ///停止录音
     func stopRecording(closure:BTCommonClosure<String>) {
         recorder?.stop()
         recorder = nil
-        recordTimer?.invalidate()
-        recordTimer = nil
+        print("stopRecording===\(self.recordPath)")
+        SSLDispatchTimer.destoryDispatchTimer(name: RecordingTimer)
+        recordSecondClosure = nil
         closure(self.recordPath)
     }
     

@@ -21,6 +21,8 @@
 		543492CF2705864B00170E57 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543492CE2705864B00170E57 /* DateExtension.swift */; };
 		543492D12705885C00170E57 /* BTAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543492D02705885C00170E57 /* BTAudioPlayer.swift */; };
 		543492D327058F7300170E57 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543492D227058F7300170E57 /* IntExtension.swift */; };
+		5461132127103674008460F3 /* SSLApplicationAuthorizationManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461132027103674008460F3 /* SSLApplicationAuthorizationManage.swift */; };
+		546113252710425B008460F3 /* BTLookAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546113242710425B008460F3 /* BTLookAnswer.swift */; };
 		549500B526F5C021002FA6DA /* BTWCDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549500B426F5C021002FA6DA /* BTWCDB.swift */; };
 		549500B726F5DC7B002FA6DA /* BTTopicApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549500B626F5DC7B002FA6DA /* BTTopicApi.swift */; };
 		549500B926FAC2A1002FA6DA /* BTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549500B826FAC2A1002FA6DA /* BTUserDefaults.swift */; };
@@ -83,6 +85,8 @@
 		543492CE2705864B00170E57 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		543492D02705885C00170E57 /* BTAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTAudioPlayer.swift; sourceTree = "<group>"; };
 		543492D227058F7300170E57 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		5461132027103674008460F3 /* SSLApplicationAuthorizationManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLApplicationAuthorizationManage.swift; sourceTree = "<group>"; };
+		546113242710425B008460F3 /* BTLookAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLookAnswer.swift; sourceTree = "<group>"; };
 		549500B426F5C021002FA6DA /* BTWCDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTWCDB.swift; sourceTree = "<group>"; };
 		549500B626F5DC7B002FA6DA /* BTTopicApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTTopicApi.swift; sourceTree = "<group>"; };
 		549500B826FAC2A1002FA6DA /* BTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTUserDefaults.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				543492C8270460F800170E57 /* BTAudioRecorder.swift */,
 				543492D02705885C00170E57 /* BTAudioPlayer.swift */,
 				543492CA2704635400170E57 /* BTFileManage.swift */,
+				5461132027103674008460F3 /* SSLApplicationAuthorizationManage.swift */,
 			);
 			path = struct;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				543492C227040AEA00170E57 /* BTStartLearning.swift */,
+				546113242710425B008460F3 /* BTLookAnswer.swift */,
 			);
 			name = C;
 			path = "BrushTheTopic/首页/C";
@@ -635,6 +641,7 @@
 				54FACECA26DCBEE900443DDC /* ContentView.swift in Sources */,
 				543492C9270460F800170E57 /* BTAudioRecorder.swift in Sources */,
 				54FACEF726DDA9D900443DDC /* BTTestDetails.swift in Sources */,
+				546113252710425B008460F3 /* BTLookAnswer.swift in Sources */,
 				543492CB2704635400170E57 /* BTFileManage.swift in Sources */,
 				54FBDA9B26EADA4600BCCE6B /* BTTestViewFour.swift in Sources */,
 				543492C52704537400170E57 /* SwiftUIViewExtension.swift in Sources */,
@@ -653,6 +660,7 @@
 				543492D327058F7300170E57 /* IntExtension.swift in Sources */,
 				543492D12705885C00170E57 /* BTAudioPlayer.swift in Sources */,
 				5496DF5F26EB46B000BAAFF5 /* BTTestViewFive.swift in Sources */,
+				5461132127103674008460F3 /* SSLApplicationAuthorizationManage.swift in Sources */,
 				549C4C4926E8A0B700A2DABA /* BTTestView.swift in Sources */,
 				5403E9CD26F1A4B10099B59D /* BTPublicPropertyAndFunc.swift in Sources */,
 				54E1496D26E9B7400063FE53 /* BTTestViewThree.swift in Sources */,
@@ -748,7 +756,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -803,7 +811,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -872,7 +880,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z7H67D9NJ9;
 				INFOPLIST_FILE = BrushTheTopicTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -894,7 +902,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z7H67D9NJ9;
 				INFOPLIST_FILE = BrushTheTopicTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -915,6 +923,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H2F8HK67WK;
 				INFOPLIST_FILE = BrushTheTopicUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -935,6 +944,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H2F8HK67WK;
 				INFOPLIST_FILE = BrushTheTopicUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

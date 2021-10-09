@@ -109,9 +109,9 @@ struct BTRecordingView: View {
 
     @State var audioRecorderState:AudioRecorderState = .standby
     
-    @State var totalTimer:Int = 0
+    @State var totalTimer:Float = 0
     
-    @State var palyTimer:Int = 0
+    @State var palyTimer:Float = 0
     ///录音时间
     @State private var recordSecond = 100
     ///录音地址
@@ -119,12 +119,7 @@ struct BTRecordingView: View {
     ///重新开始录制提示框
     @State private var againRecorderAlert = false
     
-    
     var topicModel = BTTopicEntity()
-    
-    var audioRecorder = BTAudioRecorder()
-
-    var audioPlayer = BTAudioPlayer()
     
     var body: some View {
         VStack {
@@ -134,7 +129,7 @@ struct BTRecordingView: View {
                 Button.init {
                     switch audioRecorderState {
                     case .standby:
-                        audioRecorder.startRecording(recordingName: "\(topicModel.topicID)_\(Date().dateToString("yyyyMMddHHmmss"))") { recordSecond in
+                        audioRecorder.startRecording(recordingName: "\(topicModel.topicID)bt_\(Date().dateToString("yyyyMMddHHmmss"))") { recordSecond in
                             self.recordSecond = recordSecond
                         }
                         audioRecorderState = .working
@@ -185,7 +180,7 @@ struct BTRecordingView: View {
                         recordSecond = 0
                         audioRecorderState = .working
                         recordingPath = ""
-                        audioRecorder.startRecording(recordingName: "\(topicModel.topicID)_\(Date().dateToString("yyyyMMddHHmmss"))") { recordSecond in
+                        audioRecorder.startRecording(recordingName: "\(topicModel.topicID)bt_\(Date().dateToString("yyyyMMddHHmmss"))") { recordSecond in
                             self.recordSecond = recordSecond
                         }
                     }), secondaryButton: .cancel(Text("取消")))
@@ -194,10 +189,11 @@ struct BTRecordingView: View {
                 Spacer()
                 
                 Button.init {
-                    audioRecorder.stopRecording { filePath in
+                    audioRecorder.stopRecording {filePath in
                         print("filePath==\(filePath)")
                         recordingPath = filePath
-                        audioPlayer.createPlayer(url: URL(fileURLWithPath: filePath)) { (duration: Int, currentTime: Int) in
+     
+                        audioPlayer.createPlayer(url: URL(fileURLWithPath: filePath)) { (duration: Float, currentTime: Float) in
                             totalTimer = duration
                             palyTimer = currentTime
                         }
@@ -217,7 +213,13 @@ struct BTRecordingView: View {
             .padding(.top, 10.0)
             if recordingPath.count != 0 {
                 Spacer()
-                BTRecordingPalyView(totalTimer: $totalTimer, palyTimer: $palyTimer)
+                BTRecordingPalyView(totalTimer: $totalTimer, palyTimer: $palyTimer) { _ in
+                    //play
+                    audioPlayer.playRecording { (duration: Float, currentTime: Float) in
+                        totalTimer = duration
+                        palyTimer = currentTime
+                    }
+                }
             }
             Spacer()
             
@@ -230,11 +232,11 @@ struct BTRecordingView: View {
 
 struct BTRecordingPalyView: View {
     //总时长
-    @Binding var totalTimer:Int
+    @Binding var totalTimer:Float
     //当前播放的时长
-    @Binding var palyTimer:Int
+    @Binding var palyTimer:Float
     
-    @State var testTime:Int = 40
+    var playClosure:BTCommonClosure<Int?>
     
     var body: some View {
         ZStack {
@@ -245,7 +247,7 @@ struct BTRecordingPalyView: View {
                 
             HStack {
                 Button.init {
-                    
+                    playClosure(nil)
                 } label: {
                     //BT_paly  BT_pause
                     Image("BT_paly")
@@ -255,12 +257,12 @@ struct BTRecordingPalyView: View {
                 .cornerRadius(18)
                 .padding(.leading, 10)
                 Spacer(minLength: 10)
-                Text("\(palyTimer.toTime()) / \(totalTimer.toTime())")
+                Text("\(Int(palyTimer).toTime()) / \(Int(totalTimer).toTime())")
                     .foregroundColor(.black)
                     .font(Font.init(UIFont.systemFont(ofSize: 13)))
                 Spacer()
     
-                Slider(value: $testTime, in: 0...100) { _ in
+                Slider(value: $palyTimer, in: 0...totalTimer) { _ in
                     
                 }
 

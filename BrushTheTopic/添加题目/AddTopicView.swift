@@ -186,13 +186,8 @@ struct BTTextEditor: View {
     
     
     var body: some View {
-        
-        
-        
         ZStack{
-            
-        
-            TextEditor.init(text: $TVtext)
+             TextEditor.init(text: $TVtext)
                 .padding(.leading, 10)
                 .font(.custom("Helvetica", size: 15))
                 .foregroundColor(.black)
