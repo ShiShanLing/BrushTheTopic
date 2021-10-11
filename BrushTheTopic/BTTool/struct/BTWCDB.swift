@@ -15,18 +15,21 @@ enum BTWCDBEntityEnum:String {
     case topicEntity = "topicEntity"
     ///标题
     case topicType = "topicType"
+    ///每天随机习题
+    case randomLearnTopic = "randomLearnTopic"
     ///测试用
     case Test = "Test"
     
     func entityTable() -> String {
-        switch self {
-        case .topicEntity:
-            return "\(self.rawValue)Table"
-        case .topicType:
-            return "\(self.rawValue)Table"
-        case .Test:
-            return "\(self.rawValue)Table"
-        }
+      return "\(self.rawValue)Table"
+//        switch self {
+//        case .topicEntity:
+//            return "\(self.rawValue)Table"
+//        case .topicType:
+//            return "\(self.rawValue)Table"
+//        case .randomLearnTopic:
+//            return "\(self.rawValue)Table"
+//        }
     }
 
     

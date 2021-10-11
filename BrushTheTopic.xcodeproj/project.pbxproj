@@ -23,6 +23,7 @@
 		543492D327058F7300170E57 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543492D227058F7300170E57 /* IntExtension.swift */; };
 		5461132127103674008460F3 /* SSLApplicationAuthorizationManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461132027103674008460F3 /* SSLApplicationAuthorizationManage.swift */; };
 		546113252710425B008460F3 /* BTLookAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546113242710425B008460F3 /* BTLookAnswer.swift */; };
+		54611327271131D0008460F3 /* BTRandomLearnTopicEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54611326271131D0008460F3 /* BTRandomLearnTopicEntity.swift */; };
 		549500B526F5C021002FA6DA /* BTWCDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549500B426F5C021002FA6DA /* BTWCDB.swift */; };
 		549500B726F5DC7B002FA6DA /* BTTopicApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549500B626F5DC7B002FA6DA /* BTTopicApi.swift */; };
 		549500B926FAC2A1002FA6DA /* BTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549500B826FAC2A1002FA6DA /* BTUserDefaults.swift */; };
@@ -87,6 +88,7 @@
 		543492D227058F7300170E57 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		5461132027103674008460F3 /* SSLApplicationAuthorizationManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLApplicationAuthorizationManage.swift; sourceTree = "<group>"; };
 		546113242710425B008460F3 /* BTLookAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTLookAnswer.swift; sourceTree = "<group>"; };
+		54611326271131D0008460F3 /* BTRandomLearnTopicEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTRandomLearnTopicEntity.swift; sourceTree = "<group>"; };
 		549500B426F5C021002FA6DA /* BTWCDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTWCDB.swift; sourceTree = "<group>"; };
 		549500B626F5DC7B002FA6DA /* BTTopicApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTTopicApi.swift; sourceTree = "<group>"; };
 		549500B826FAC2A1002FA6DA /* BTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTUserDefaults.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				54E0F1AE26F443E900816788 /* BTTopicEntity.swift */,
 				549500C226FAD031002FA6DA /* BTTopicTypeEntity.swift */,
+				54611326271131D0008460F3 /* BTRandomLearnTopicEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				549C4C4C26E8A18600A2DABA /* BTTestViewTwo.swift in Sources */,
 				54FACEC826DCBEE900443DDC /* BrushTheTopicApp.swift in Sources */,
 				549500B926FAC2A1002FA6DA /* BTUserDefaults.swift in Sources */,
+				54611327271131D0008460F3 /* BTRandomLearnTopicEntity.swift in Sources */,
 				543492C7270453B600170E57 /* UIApplicationExtension.swift in Sources */,
 				5407D25F26E1965F0083D4C2 /* CurentlyReading.swift in Sources */,
 				54E1496F26E9B8400063FE53 /* BTTabView.swift in Sources */,

@@ -14,7 +14,6 @@ struct BTTopicTypeMenu: View {
     @Binding var tipicTypeModel:String
     
     @State var typeSelect = false
-
     
     
     var topicTypes:[BTTopicTypeEntity] = BTWCDB.queryEntityTable(.topicType)

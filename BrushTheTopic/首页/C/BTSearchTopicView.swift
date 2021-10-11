@@ -51,6 +51,7 @@ struct BTSearchTopicView: View {
             
             List.init {
                 ForEach.init(searchResultsArray, id: \.self) { model in
+                    
                     let tempView = AddTopicView(viewType:.Editor,
                                                 topicTitle: model.topicTitle,
                                                 topicAnswer: model.topicAnswer,
@@ -62,7 +63,9 @@ struct BTSearchTopicView: View {
                 }
                 .onDelete(perform: { indexSet in
                     withAnimation(.easeOut) {
+                        
                         let tempModel = searchResultsArray[indexSet.first ?? 0]
+                        print("model.toJSONString()==\(tempModel.toJSONString())")
                         BTWCDB.delectEntity(entity: BTWCDBEntityEnum.topicEntity, condition: BTTopicEntity.Properties.topicID == tempModel.topicID) { result in
                             searchResultsArray.remove(atOffsets: indexSet)
                         }

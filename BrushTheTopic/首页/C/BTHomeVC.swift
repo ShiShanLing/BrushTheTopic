@@ -58,6 +58,8 @@ struct BTHomeVC: View {
     func insertLocalTopic() {
 
         BTWCDB.createDatabase(.topicEntity, of: BTTopicEntity.self)
+        BTWCDB.createDatabase(.randomLearnTopic, of: BTRandomLearnTopicEntity.self)
+        
         if !(BTUserDefaults.readState(type: .localTopicStored, TType: Bool.self) ?? false) {
             BTWCDB.insertData(.topicEntity, objects: BTTopicApi.importLocalData())
             let _ = BTUserDefaults.writeState(type: .localTopicStored)
@@ -67,7 +69,7 @@ struct BTHomeVC: View {
             let models:[BTTopicEntity] = try BTWCDB.database(.topicEntity).getObjects(fromTable: BTWCDBEntityEnum.topicEntity.entityTable(), where: BTTopicEntity.Properties.topicType == "Swift")
             print("models==\(models)")
         } catch _ {
-            
+                
         }
              
         BTWCDB.createDatabase(.topicType, of: BTTopicTypeEntity.self)

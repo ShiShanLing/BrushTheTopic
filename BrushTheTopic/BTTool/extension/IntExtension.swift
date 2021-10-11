@@ -11,7 +11,7 @@ extension Int {
     ///转换为tiemr 02:30
      func toTime() -> String {
         if self <= 0 {
-            return ""
+            return "00:00"
         }
         let hour = self / 3600//小时
         let min = (self % 3600) / 60//分钟

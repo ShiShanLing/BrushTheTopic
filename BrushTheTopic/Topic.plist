@@ -156,5 +156,61 @@ MVVM优点：
 3.独立开发，通过MVVM开发人员可以专注逻辑开发在ViewModel里面。而设计开发，开一专注于界面设计
 4.可测试，通常来说要进行界面测试比较困难，但是MVVM课对ViewModel进行测试</string>
 	</dict>
+	<dict>
+		<key>topicID</key>
+		<string>B3D13263-0800-4266-9D3B-0D91D5554BB7</string>
+		<key>topicType</key>
+		<string>Swift</string>
+		<key>topicTitle</key>
+		<string>swift和OC的优缺点</string>
+		<key>topicAnswer</key>
+		<string>swift是一门静态语言注重安全，OC是一门动态语言，注重灵活。
+swift也是一门强类型语言，强类型语言是一种强制类型定义的语言,一旦某一个变量被定义类型,如果不经过强制转换,则它永远就是该数据类型了 好处就是，一些错误在编译器就会暴露出来，而不是等到运行期。
+
+swift中注重的是值类型，OC注重的是指针和引用
+swift注重的是函数式编程，面向协议时编程，面向对象式编程，而OC注重的是面向对象式编程
+swift中系统提供了一些高阶函数，比如map filter reduce
+swift 提供了一元组类型，他们可以任意组装数据，用起来非常方便
+swift中有一个Optional可选类型。它适用于所有的类型，而不局限于类。比OC中的nil更加安全
+swift中的泛型使用更加方便，OC中的只能为集合添加泛型
+因为swift的对象大多是值类型。像OC中的深浅拷贝基本不用考虑例如String。
+你创建一个StringA，= 中国。创建一个StringB=StringA 这是两个对象是使用同一个地址但是当你对StringB的值进行修改=中国牛皮的时候，StringA其实还是=中国，他并不会更改StringA的值。这个特性得益于Swfit的一个特性，copy on write 
+缺点目前市场占有率还是低，开发中遇到什么问题，很难查找资料（不过这两年有好转了）有很多类库还不支持swift需要混合开发。使用桥接文件类完成引用。
+</string>
+	</dict>
+	<dict>
+		<key>topicID</key>
+		<string>B3D13263-0800-4266-9D3B-0D91D5554BB8</string>
+		<key>topicType</key>
+		<string>Swift</string>
+		<key>topicTitle</key>
+		<string>iOS开发分区</string>
+		<key>topicAnswer</key>
+		<string>• 栈区：存放函数的参数和临时变量的值。由系统自动释放
+
+• 堆区：OC的对象存在这里面。使用copy修饰的block也存在这个里面
+
+• 全局区：未使用外部变量的block存放在全局区。全局变量和静态变量是存放在一块的，已初始化的全局变量和静态变量是存放在一块，未初始化的全局变量和静态变量是存放在一块的。
+
+• 代码区：存放函数体的二进制代码。
+
+• 常量区：常量字符串就放在这里。程序结束后由系统自动释放
+◎ 在iOS开发中，堆分区的内存是应用程序公用的，堆中的内存分配是由系统负责的。
+◎ 系统使用链表来维护所有已分配的内存空间。
+◎ 变量使用结束后，需要释放其内存。OC是判断其应用计数时候为0，如果是就说明没有任何变量使用该空间，系统会将其回收。
+◎ 当一个App已经启动好了之后，全局区，常量去，代码区，的内存大小就已经固定了，因此指向这些区的指针不会产生崩溃性的错误。而堆区和栈区的内存是在时时刻刻变化的（堆的创建销毁，栈的弹入弹出），所以当使用一个指针指向这里的内存时，一定要注意是否已经被释放掉。否者会产生系统崩溃。（也就是野指针）</string>
+	</dict>
+	<dict>
+		<key>topicID</key>
+		<string>B3D13263-0800-4266-9D3B-0D91D5554BB9</string>
+		<key>topicType</key>
+		<string>Swift</string>
+		<key>topicTitle</key>
+		<string>AutoReleasePoolPage</string>
+		<key>topicAnswer</key>
+		<string>自动释放池：autoReleasePool是以双向链表的形式实现。
+• 当对象调用autoreleasePool时，会将对象添加到autoReleasePoolPage栈中。
+• 调用AutoreleasePoolPage：pop，方法会向栈中的对象发送release操作</string>
+	</dict>
 </array>
 </plist>

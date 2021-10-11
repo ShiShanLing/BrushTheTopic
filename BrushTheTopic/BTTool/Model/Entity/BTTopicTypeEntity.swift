@@ -9,10 +9,10 @@ import Foundation
 import HandyJSON
 import WCDBSwift
 
-enum BTTopicTypeEnum {
-    case SwiftUI
-    case Swift
-    case OC
+enum BTTopicTypeEnum:String {
+    case SwiftUI = "SwiftUI"
+    case Swift = "Swift"
+    case OC = "OC"
 }
 
 struct BTTopicTypeEntity: TableCodable,HandyJSON, Hashable {

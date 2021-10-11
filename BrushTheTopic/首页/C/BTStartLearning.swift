@@ -36,16 +36,17 @@ struct BTStartLearning: View {
     
     @State var topicAnswer = ""
     
+    @State var topicModel = BTTopicEntity()
+    
+    @State var recordingPath:String = ""
     var body: some View {
         VStack{
-          
-
             ScrollView{
-                Text("什么是runLoop？他可以用来做什么？项目中需要注意的地方。")
+                Text(topicModel.topicTitle)
                     .padding(.horizontal, 15.0)
                 
                 Spacer(minLength: 30)
-                Text("你第N次遇到这个问题")
+                Text("你第\(topicModel.LearnNum)次遇到这个问题")
                     .font(Font.init(UIFont.systemFont(ofSize: 15)))
                     .foregroundColor(.gray)
                 
@@ -67,7 +68,7 @@ struct BTStartLearning: View {
                         .frame(width: SCREEN_WIDTH-60, height: 150, alignment: .leading)
                 }else {
                     Spacer(minLength: 20)
-                    BTRecordingView()
+                    BTRecordingView(recordingPath: $recordingPath)
                         .frame(width: SCREEN_WIDTH-60, alignment: .leading)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10, style: .circular)
@@ -75,21 +76,34 @@ struct BTStartLearning: View {
                         )
                 }
                 Spacer(minLength: 30)
-                Text("答题完毕")
-                    .frame(width: 100, height: 40, alignment: .center)
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                
+                NavigationLink.init(destination: BTLookAnswer(topicModel: self.topicModel, userRecordingAnswer: recordingPath)) {
+                    Text("答题完毕")
+                        .frame(width: 100, height: 40, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                   
                 Spacer(minLength: 100)
-                Text("忘记了?查看答案")
-                    .frame(width: 200, height: 40, alignment: .center)
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                    .cornerRadius(8)
+                NavigationLink.init(destination: BTLookAnswer(topicModel: self.topicModel, userRecordingAnswer: recordingPath)) {
+                    Text("忘记了?查看答案")
+                        .frame(width: 200, height: 40, alignment: .center)
+                        .foregroundColor(.white)
+                        .background(Color.red)
+                        .cornerRadius(8)
+
+                }
                 
             }
         }
-
+        .onAppear {
+            //如果是空的需要提示已经结束
+            topicModel = BTTopicApi.getLearnTopic() ?? BTTopicEntity()
+        }
+        .navigationTitle(topicModel.topicTitle)
+        .foregroundColor(.blue)
+        .navigationBarTitleDisplayMode(.inline)
         
     }
 }
@@ -115,9 +129,10 @@ struct BTRecordingView: View {
     ///录音时间
     @State private var recordSecond = 100
     ///录音地址
-    @State private var recordingPath = ""
+    @Binding var recordingPath:String
     ///重新开始录制提示框
     @State private var againRecorderAlert = false
+    
     
     var topicModel = BTTopicEntity()
     
@@ -192,7 +207,7 @@ struct BTRecordingView: View {
                     audioRecorder.stopRecording {filePath in
                         print("filePath==\(filePath)")
                         recordingPath = filePath
-     
+
                         audioPlayer.createPlayer(url: URL(fileURLWithPath: filePath)) { (duration: Float, currentTime: Float) in
                             totalTimer = duration
                             palyTimer = currentTime
@@ -222,11 +237,7 @@ struct BTRecordingView: View {
                 }
             }
             Spacer()
-            
         }
-        
-        
-    
     }
 }
 

@@ -26,17 +26,20 @@ struct BTTopicEntity:TableCodable,HandyJSON, Hashable, Codable{
     ///录音路径
     var recordPaths:[String] = [String]()
     ///熟练程度
-    var learnLevel:BTlearnLevelEnum = .understand
+    var learnLevel = BTlearnLevelEnum.understand.rawValue
+    ///当前学习状态
+    var currenLearnState = BTlearnLevelEnum.understand.rawValue
     
-    enum BTlearnLevelEnum {
+    
+    enum BTlearnLevelEnum:Int {
         ///不认识
-        case unfamiliar
+        case unfamiliar = 0
         ///眼熟
-        case lookFamiliar
+        case lookFamiliar = 1
         ///了解
-        case understand
+        case understand = 2
         ///精通
-        case proficient
+        case proficient = 3
     }
     
     enum CodingKeys:String, CodingTableKey {
@@ -47,6 +50,7 @@ struct BTTopicEntity:TableCodable,HandyJSON, Hashable, Codable{
         case topicAnswer
         case topicID
         case LearnNum
+        case learnLevel
         
         static var columnConstraintBindings: [CodingKeys: ColumnConstraintBinding]? {
               return [
