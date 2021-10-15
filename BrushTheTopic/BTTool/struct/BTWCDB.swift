@@ -8,7 +8,7 @@
 import Foundation
 import WCDBSwift
 
-
+//@discardableResult
 
 enum BTWCDBEntityEnum:String {
     ///习题
@@ -70,6 +70,7 @@ struct BTWCDB {
     static func insertData<Object: TableEncodable>(_ entity:BTWCDBEntityEnum, objects:[Object], closure:BTCommonClosure<Bool>? = nil) {
         
         do {
+            
             try BTWCDB.database(entity).insertOrReplace(objects: objects, intoTable: entity.entityTable())
             closure?(true)
         } catch let error {
@@ -84,7 +85,7 @@ struct BTWCDB {
             closure?(true)
         } catch let error {
             closure?(false)
-            print("插入数据库失败", error)
+            print("更新数据库失败", error)
         }
     }
     

@@ -51,15 +51,7 @@ struct BTSearchTopicView: View {
             
             List.init {
                 ForEach.init(searchResultsArray, id: \.self) { model in
-                    
-                    let tempView = AddTopicView(viewType:.Editor,
-                                                topicTitle: model.topicTitle,
-                                                topicAnswer: model.topicAnswer,
-                                                topicTypeModel: BTTopicTypeEntity(topicType: model.topicType),
-                                                topicID:model.topicID)
-                    NavigationLink(destination:tempView){
-                        BTSearchTopicCell(model: model)
-                    }
+                    BTSearchTopicCell(model: model)
                 }
                 .onDelete(perform: { indexSet in
                     withAnimation(.easeOut) {
@@ -93,6 +85,7 @@ struct BTSearchTopicView: View {
 struct BTSearchTopicCell: View {
     
     var model = BTTopicEntity()
+    @State var isPresented = false
     @State var isUnfoldAnswer = false
     var body: some View {
         //标题 答案 次数
@@ -139,6 +132,20 @@ struct BTSearchTopicCell: View {
                 .frame(width: 60, height: 30, alignment: .center)
             }
         }
+        .onTapGesture {
+            isPresented.toggle()
+        }
+        .fullScreenCover(isPresented: $isPresented) {
+            
+        } content: {
+            AddTopicView(viewType:.Editor,
+                                        topicTitle: model.topicTitle,
+                                        topicAnswer: model.topicAnswer,
+                                        topicTypeModel: BTTopicTypeEntity(topicType: model.topicType),
+                                        topicID:model.topicID)
+        }
+
+        
     }
         
 

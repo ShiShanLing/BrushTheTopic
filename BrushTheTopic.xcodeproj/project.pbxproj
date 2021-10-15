@@ -36,10 +36,10 @@
 		54E0F1AB26F2EA7A00816788 /* BTTopicTypeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0F1AA26F2EA7A00816788 /* BTTopicTypeMenu.swift */; };
 		54E0F1AD26F370A300816788 /* BTSearchTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0F1AC26F370A300816788 /* BTSearchTopicView.swift */; };
 		54E0F1AF26F443E900816788 /* BTTopicEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0F1AE26F443E900816788 /* BTTopicEntity.swift */; };
-		54E0F1B126F4491800816788 /* Topic.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54E0F1B026F4491800816788 /* Topic.plist */; };
 		54E1496D26E9B7400063FE53 /* BTTestViewThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E1496C26E9B7400063FE53 /* BTTestViewThree.swift */; };
 		54E1496F26E9B8400063FE53 /* BTTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E1496E26E9B8400063FE53 /* BTTabView.swift */; };
 		54E2D82E26E8347C00662FE5 /* BTHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E2D82D26E8347C00662FE5 /* BTHomeVC.swift */; };
+		54E7AA732716CF5E001E8016 /* Topic.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54E7AA722716CF5E001E8016 /* Topic.plist */; };
 		54FACEC826DCBEE900443DDC /* BrushTheTopicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FACEC726DCBEE900443DDC /* BrushTheTopicApp.swift */; };
 		54FACECA26DCBEE900443DDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FACEC926DCBEE900443DDC /* ContentView.swift */; };
 		54FACECC26DCBEEA00443DDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54FACECB26DCBEEA00443DDC /* Assets.xcassets */; };
@@ -102,10 +102,10 @@
 		54E0F1AA26F2EA7A00816788 /* BTTopicTypeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTTopicTypeMenu.swift; sourceTree = "<group>"; };
 		54E0F1AC26F370A300816788 /* BTSearchTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTSearchTopicView.swift; sourceTree = "<group>"; };
 		54E0F1AE26F443E900816788 /* BTTopicEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTTopicEntity.swift; sourceTree = "<group>"; };
-		54E0F1B026F4491800816788 /* Topic.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Topic.plist; sourceTree = "<group>"; };
 		54E1496C26E9B7400063FE53 /* BTTestViewThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTTestViewThree.swift; sourceTree = "<group>"; };
 		54E1496E26E9B8400063FE53 /* BTTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTTabView.swift; sourceTree = "<group>"; };
 		54E2D82D26E8347C00662FE5 /* BTHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTHomeVC.swift; sourceTree = "<group>"; };
+		54E7AA722716CF5E001E8016 /* Topic.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Topic.plist; sourceTree = "<group>"; };
 		54FACEC426DCBEE900443DDC /* BrushTheTopic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrushTheTopic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54FACEC726DCBEE900443DDC /* BrushTheTopicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushTheTopicApp.swift; sourceTree = "<group>"; };
 		54FACEC926DCBEE900443DDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -411,7 +411,7 @@
 				54FACEC726DCBEE900443DDC /* BrushTheTopicApp.swift */,
 				54FACECB26DCBEEA00443DDC /* Assets.xcassets */,
 				54FACED026DCBEEA00443DDC /* Info.plist */,
-				54E0F1B026F4491800816788 /* Topic.plist */,
+				54E7AA722716CF5E001E8016 /* Topic.plist */,
 				54FACECD26DCBEEA00443DDC /* Preview Content */,
 			);
 			path = BrushTheTopic;
@@ -566,7 +566,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54E0F1B126F4491800816788 /* Topic.plist in Resources */,
+				54E7AA732716CF5E001E8016 /* Topic.plist in Resources */,
 				54FACECF26DCBEEA00443DDC /* Preview Assets.xcassets in Resources */,
 				54FACECC26DCBEEA00443DDC /* Assets.xcassets in Resources */,
 				54FACEF926DDABEA00443DDC /* test2@2x.gif in Resources */,
@@ -837,7 +837,7 @@
 				DEVELOPMENT_TEAM = Z7H67D9NJ9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BrushTheTopic/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -863,7 +863,7 @@
 				DEVELOPMENT_TEAM = Z7H67D9NJ9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BrushTheTopic/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

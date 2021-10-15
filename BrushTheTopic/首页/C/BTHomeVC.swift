@@ -12,37 +12,74 @@ import WCDBSwift
 struct BTHomeVC: View {
     
     @State var searchIsActive = false
+    
+    @State var isfullScreenStart = false
+    @State var isfullScreenSearch = false
+    @State var isfullScreenAdd = false
     var body: some View {
-        NavigationView {
-            ZStack {
-                HomeBackgroundImageView()
-                    .frame(width: SCREEN_WIDTH, height: SCREEN_HEIGHT, alignment: .center)
-                VStack{
-                    Spacer()
-                    Spacer()
-                    Text("您已经进行了N天,打了N个怪兽")
-                        .padding(.all)
-                        .foregroundColor(.white)
-                    Text("您已经进行了N天,打了N个怪兽.您已经进行了N天,打了N个怪兽.")
-                        .padding(.all)
-                        .foregroundColor(.white)
+        ZStack {
+            HomeBackgroundImageView()
+                .frame(width: SCREEN_WIDTH, height: SCREEN_HEIGHT, alignment: .center)
+            VStack{
+                Spacer()
+                HStack {
                     Spacer()
                     
-                    NavigationLink.init(destination: BTStartLearning()) {
-                        Text("开始")
-                        .frame(width: 100, height: 40, alignment: .center)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                    Label.init(
+                        title: { Text("").foregroundColor(.white) },
+                        icon: { Image.init("BT_home_add")}
+                    )
+                    .foregroundColor(.blue)
+                    .frame(height:44)
+                    .padding(.trailing)
+                    .onTapGesture {
+                        isfullScreenAdd.toggle()
                     }
-                    Spacer()
-                    Spacer()
+                    
+                    Label.init(
+                        title: { Text("").foregroundColor(.white) },
+                        icon: { Image.init("BT_home_search")}
+                    )
+                    .foregroundColor(.blue)
+                    .frame(height:44)
+                    .padding(.trailing)
+                    .onTapGesture {
+                        isfullScreenSearch.toggle()
+                    }
+                
                 }
-                .padding(.top, 0)
+                Spacer()
+                Text("您已经进行了N天,打了N个怪兽")
+                    .padding(.all)
+                    .foregroundColor(.white)
+                Text("您已经进行了N天,打了N个怪兽.您已经进行了N天,打了N个怪兽.")
+                    .padding(.all)
+                    .foregroundColor(.white)
+                Spacer()
+                
+                Text("开始")
+                .frame(width: 100, height: 40, alignment: .center)
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(8)
+                .onTapGesture {
+                    isfullScreenStart.toggle()
+                }
+                Spacer()
+                Spacer()
             }
-            .navigationBarItems(trailing: HomeNavigationView())
+            .padding(.top, 0)
         }
-
+        
+        .fullScreenCover(isPresented: $isfullScreenStart, onDismiss: nil, content: {
+            BTStartLearning()
+        })
+        .fullScreenCover(isPresented: $isfullScreenAdd, onDismiss: nil, content: {
+            AddTopicView()
+        })
+        .fullScreenCover(isPresented: $isfullScreenSearch, onDismiss: nil, content: {
+            BTSearchTopicView()
+        })
         .onDisappear(perform: {
             
         })
@@ -151,50 +188,14 @@ struct HomeBackgroundImageView : View{
 }
 
 
-struct HomeNavigationView : View{
-    
-    @State var searchIsActive = false
-    
-    var body: some View {
-        
-        HStack {
-            Spacer()
-            
-            NavigationLink.init(
-                destination: AddTopicView(),
-                label: {
-                    Label.init(
-                        title: { Text("").foregroundColor(.white) },
-                        icon: { Image.init("BT_home_add")}
-                    )
-                    .foregroundColor(.blue)
-                    .frame(height:44)
-                    .padding(.trailing)
-                })
-            
-            NavigationLink.init(
-                destination: BTSearchTopicView(),
-                label: {
-                    Label.init(
-                        title: { Text("").foregroundColor(.white) },
-                        icon: { Image.init("BT_home_search")}
-                    )
-                    .foregroundColor(.blue)
-                    .frame(height:44)
-                    .padding(.trailing)
-                })
-        
-        }
-    }
-}
 
 struct BTHomeVC_Previews: PreviewProvider {
     static var previews: some View {
         
         Group {
             BTHomeVC()
-            HomeBackgroundImageView()
-            HomeNavigationView()
+                            
+            
         }
         
         

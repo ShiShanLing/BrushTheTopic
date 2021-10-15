@@ -39,11 +39,20 @@ struct BTStartLearning: View {
     @State var topicModel = BTTopicEntity()
     
     @State var recordingPath:String = ""
+    
+    @State var isActive = false
+    
+    @State var isViewAnswerActive = false
+    
+    
     var body: some View {
+        
         VStack{
             ScrollView{
+                Spacer.init(minLength: kNavigationBarXExtraHeight)
                 Text(topicModel.topicTitle)
                     .padding(.horizontal, 15.0)
+                    .foregroundColor(Color.white)
                 
                 Spacer(minLength: 30)
                 Text("你第\(topicModel.LearnNum)次遇到这个问题")
@@ -77,33 +86,43 @@ struct BTStartLearning: View {
                 }
                 Spacer(minLength: 30)
                 
-                NavigationLink.init(destination: BTLookAnswer(topicModel: self.topicModel, userRecordingAnswer: recordingPath)) {
-                    Text("答题完毕")
-                        .frame(width: 100, height: 40, alignment: .center)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                Text("答题结束")
+                .foregroundColor(.white)
+                .onTapGesture {
+                    self.topicModel.currenLearnState += 1
+                    isViewAnswerActive.toggle()
                 }
-                   
-                Spacer(minLength: 100)
-                NavigationLink.init(destination: BTLookAnswer(topicModel: self.topicModel, userRecordingAnswer: recordingPath)) {
-                    Text("忘记了?查看答案")
-                        .frame(width: 200, height: 40, alignment: .center)
-                        .foregroundColor(.white)
-                        .background(Color.red)
-                        .cornerRadius(8)
-
-                }
+                .frame(width: 100, height: 40, alignment: .center)
+                .background(Color.blue)
+                .cornerRadius(8)
+                
+                Spacer(minLength: 30)
+                
+                Text("忘记了?查看答案")
+                    .frame(width: 150, height: 40, alignment: .center)
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        isViewAnswerActive = true
+                    }
                 
             }
+            .navigationBarHidden(true)
         }
         .onAppear {
             //如果是空的需要提示已经结束
             topicModel = BTTopicApi.getLearnTopic() ?? BTTopicEntity()
         }
-        .navigationTitle(topicModel.topicTitle)
-        .foregroundColor(.blue)
+        .fullScreenCover(isPresented: $isViewAnswerActive) {
+
+        } content: {
+            BTLookAnswer(topicModel: self.topicModel, userRecordingAnswer: recordingPath)
+        }
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)//隐藏系统返回按钮
+        
+
         
     }
 }

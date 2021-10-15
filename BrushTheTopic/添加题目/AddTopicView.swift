@@ -22,8 +22,8 @@ struct AddTopicView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var viewType:AddViewTypeEnum = .Add
     @State var showingDetail = false
-    @State var topicTitle = "石山岭"
-    @State var topicAnswer = "123"
+    @State var topicTitle = ""
+    @State var topicAnswer = ""
     @State var isCanSubmit = false
     @State var topicTypeModel = BTTopicTypeEntity(topicType: "请选择")
     ///如果是编辑问题需要传这个值进来
@@ -32,98 +32,84 @@ struct AddTopicView: View {
     @State var actionStr = ""
     @State var isSaveSuccess = false
     var body: some View {
-        NavigationView {
-            
-            VStack {
-                ScrollView{
-                    TopicTypeSelectView(topicType: $topicTypeModel.topicType)
-                    .padding(.leading, 15.0)
-                    .padding(.top, 25)
-                    
-                    Text("填写题目:")
-                        .frame(width: SCREEN_WIDTH-60, height: 30, alignment: .leading)
-                    BTTextEditor(TVtext: $topicTitle)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .circular)
-                            .stroke(Color.yellow, lineWidth: 1)
-                    )
-                    .frame(width: SCREEN_WIDTH-60, height: 100, alignment: .leading)
-                    
-                    Text("填写答案:")
-                        .frame(width: SCREEN_WIDTH-60, alignment: .leading)
-                    BTTextEditor(TVtext: $topicAnswer)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10, style: .circular)
-                            .stroke(Color.yellow, lineWidth: 1)
-                    )
-                    .frame(width: SCREEN_WIDTH-60, height: 100, alignment: .leading)
-                         
-                }
-
-                //这个要在navigation内部隐藏
-                .navigationBarHidden(true)
-                Button.init {
-                    //添加同时添加提示
-                    actionStr = ""
-                    if topicTypeModel.topicType.count == 0 || topicTypeModel.topicType == "请选择" {
-                        actionStr = "请选择题目类型"
-                    }else if topicTitle.count == 0 {
-                        actionStr = "请输入题目"
-                    }else if topicAnswer.count == 0 {
-                        actionStr = "请输入答案"
-                    }
-                    if actionStr.count == 0 {
-                        saveTopic()
-                    }else{
-                        addActionSheet.toggle()
-                    }
-                } label: {
-                    Label.init {
-                        Text(self.viewType == .Add ? "添加":"保存")
-                    } icon: {
-                        
-                        Image(self.viewType == .Add ? "BT_home_add":"BT_save")
-                    }
-                }
-                .frame(width: 100, height: 40)
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .cornerRadius(8)
-                .alert(isPresented: $addActionSheet){
-                    Alert.init(title: Text("提示"), message: Text(actionStr), dismissButton: .default(Text("OK"), action: {
-                        if isSaveSuccess == true {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }))
-                }
-                                                                                                    
-//                .actionSheet(isPresented: $addActionSheet) {
-//                    ActionSheet.init(title: Text("提示"), message: Text(actionStr), buttons: [
-//                        .destructive(Text("知道了"), action: {
-//
-//                        }),
-//                        .cancel()
-//                    ])
-//                }
-                Spacer(minLength: 50)
+        VStack {
+            //
+            HStack{
+                Button.init(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Label.init("返回", image: "BT_return")
+                })
+                    .padding(.leading, 20.0)
+                Spacer()
             }
             
-            
-            
-         
+            ScrollView{
+                TopicTypeSelectView(topicType: $topicTypeModel.topicType)
+                .padding(.leading, 15.0)
+                .padding(.top, 25)
+                
+                Text("填写题目:")
+                    .frame(width: SCREEN_WIDTH-60, height: 30, alignment: .leading)
+                BTTextEditor(TVtext: $topicTitle)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10, style: .circular)
+                        .stroke(Color.yellow, lineWidth: 1)
+                )
+                .frame(width: SCREEN_WIDTH-60, height: 100, alignment: .leading)
+                
+                Text("填写答案:")
+                    .frame(width: SCREEN_WIDTH-60, alignment: .leading)
+                BTTextEditor(TVtext: $topicAnswer)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10, style: .circular)
+                        .stroke(Color.yellow, lineWidth: 1)
+                )
+                .frame(width: SCREEN_WIDTH-60, height: 100, alignment: .leading)
+                     
+            }
+            //这个要在navigation内部隐藏
+            .navigationBarHidden(true)
+            Button.init {
+                //添加同时添加提示
+                actionStr = ""
+                if topicTypeModel.topicType.count == 0 || topicTypeModel.topicType == "请选择" {
+                    actionStr = "请选择题目类型"
+                }else if topicTitle.count == 0 {
+                    actionStr = "请输入题目"
+                }else if topicAnswer.count == 0 {
+                    actionStr = "请输入答案"
+                }
+                if actionStr.count == 0 {
+                    saveTopic()
+                }else{
+                    addActionSheet.toggle()
+                }
+            } label: {
+                Label.init {
+                    Text(self.viewType == .Add ? "添加":"保存")
+                } icon: {
+                    
+                    Image(self.viewType == .Add ? "BT_home_add":"BT_save")
+                }
+            }
+            .frame(width: 100, height: 40)
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .cornerRadius(8)
+            .alert(isPresented: $addActionSheet){
+                Alert.init(title: Text("提示"), message: Text(actionStr), dismissButton: .default(Text("OK"), action: {
+                    if isSaveSuccess == true {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }))
+            }
+                                                                                    
+            Spacer(minLength: 50)
         }
-        
-        .navigationTitle(self.viewType == .Add ? "添加题目":"编辑题目")
-        .foregroundColor(.blue)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)//隐藏系统返回按钮
-        .navigationBarItems(leading:
-                                Button.init(action: {
-                                    presentationMode.wrappedValue.dismiss()
-                                }, label: {
-                                    Label.init("返回", image: "BT_return")
-                                })
-        )
+        .foregroundColor(.white)
+ 
+ 
         
     }
     
@@ -182,17 +168,14 @@ struct BTTextEditor: View {
 //
 //    var textClosure:BTCommonClosure<String>?
     
-    
-    
-    
     var body: some View {
         ZStack{
              TextEditor.init(text: $TVtext)
                 .padding(.leading, 10)
                 .font(.custom("Helvetica", size: 15))
-                .foregroundColor(.black)
-                .submitLabel(.done)
-                .submitScope(true)
+                .foregroundColor(.white)
+//                .submitLabel(.done)
+//                .submitScope(true)
 
             
             if TVtext.isEmpty {
@@ -200,7 +183,7 @@ struct BTTextEditor: View {
                     VStack{
                         Text("请输入")
                             .font(.custom("Helvetica", size: 15))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.white)
                             .padding(.leading, 15)
                         Spacer()
                     }

@@ -62,8 +62,13 @@ struct BTTopicApi {
             if models.count > learnTopicNum {
                 models = models.dropLast(models.count - learnTopicNum)
             }
+            
             print("models==\(models.count)")
-            return models
+            return models.map { model in
+                var tempModel = model
+                tempModel.currenLearnState = 0
+                return tempModel
+            }
         } catch _ {
             
         }
