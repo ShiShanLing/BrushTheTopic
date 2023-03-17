@@ -97,6 +97,7 @@ struct BTSearchTopicCell: View {
                     .padding(.bottom, 5)
                     .font(.title3)
                 Spacer()
+                Spacer()
                 VStack{
                     Text("学习过\(model.LearnNum )次")
                         .padding(.top, 5)
@@ -104,6 +105,15 @@ struct BTSearchTopicCell: View {
                         .foregroundColor(.yellow)
                         .fixedSize()
                 }
+                Text("编辑")
+                    .padding(.top, 5)
+                    .padding(.bottom, 5)
+                    .foregroundColor(.white)
+                    .fixedSize()
+                    .onTapGesture {
+                        isPresented.toggle()
+                    }
+            
             }
             
             HStack {
@@ -131,9 +141,6 @@ struct BTSearchTopicCell: View {
                 })
                 .frame(width: 60, height: 30, alignment: .center)
             }
-        }
-        .onTapGesture {
-            isPresented.toggle()
         }
         .fullScreenCover(isPresented: $isPresented) {
             

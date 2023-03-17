@@ -834,7 +834,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"BrushTheTopic/Preview Content\"";
-				DEVELOPMENT_TEAM = Z7H67D9NJ9;
+				DEVELOPMENT_TEAM = H2F8HK67WK;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BrushTheTopic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -846,7 +846,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BrushTheTopic/Header/BrushTheTopic-Bridging.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -860,7 +860,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"BrushTheTopic/Preview Content\"";
-				DEVELOPMENT_TEAM = Z7H67D9NJ9;
+				DEVELOPMENT_TEAM = H2F8HK67WK;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BrushTheTopic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -871,7 +871,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BrushTheTopic.www.ssl.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BrushTheTopic/Header/BrushTheTopic-Bridging.h";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

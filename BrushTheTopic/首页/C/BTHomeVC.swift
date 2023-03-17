@@ -12,7 +12,6 @@ import WCDBSwift
 struct BTHomeVC: View {
     
     @State var searchIsActive = false
-    
     @State var isfullScreenStart = false
     @State var isfullScreenSearch = false
     @State var isfullScreenAdd = false

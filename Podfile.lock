@@ -1,14 +1,16 @@
 PODS:
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - HandyJSON (5.0.2)
-  - SQLiteRepairKit (1.2.2):
-    - WCDBOptimizedSQLCipher (~> 1.2.0)
-  - WCDB.swift (1.0.8.2):
-    - SQLiteRepairKit (~> 1.2.0)
-    - WCDBOptimizedSQLCipher (~> 1.2.0)
-  - WCDBOptimizedSQLCipher (1.2.1)
+  - SQLiteRepairKit (1.3.0):
+    - WCDBOptimizedSQLCipher (~> 1.3.0)
+  - SwiftAlgorithms (1.0.0)
+  - WCDB.swift (1.1.0):
+    - SQLiteRepairKit (~> 1.3.0)
+    - WCDBOptimizedSQLCipher (~> 1.3.0)
+  - WCDBOptimizedSQLCipher (1.3.0)
 
 DEPENDENCIES:
   - Charts
@@ -20,16 +22,18 @@ SPEC REPOS:
     - Charts
     - HandyJSON
     - SQLiteRepairKit
+    - SwiftAlgorithms
     - WCDB.swift
     - WCDBOptimizedSQLCipher
 
 SPEC CHECKSUMS:
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
-  WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
-  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
+  SQLiteRepairKit: a66145aadae91886c800f75e16f5cc6476af1a93
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  WCDB.swift: 39e28fe29b5a3bf2927d9fb9218978f19bd49ff0
+  WCDBOptimizedSQLCipher: fc5d49fe6761e54aad29e88da01b6fc1283e5759
 
 PODFILE CHECKSUM: 505978cd7c4bd55de9bfb84d295f658f0608ce6e
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.3
